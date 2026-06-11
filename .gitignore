@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+server/uploads/gst-bills/*
+server/uploads/site-expenses/*
+!server/uploads/gst-bills/.gitkeep
+!server/uploads/site-expenses/.gitkeep
+npm-debug.log*
+.DS_Store
+
