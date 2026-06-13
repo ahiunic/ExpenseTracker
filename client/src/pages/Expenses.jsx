@@ -7,7 +7,11 @@ import { Alert, Badge, Empty, Modal, PageTitle, Pagination } from '../components
 const blank={site_name:'',supervisor_name:'',mobile:'',expense_type:'',amount:'',expense_date:'',remarks:''};
 export default function Expenses(){
  const {user}=useAuth();const [records,setRecords]=useState([]);const [pagination,setPagination]=useState();const [page,setPage]=useState(1);const [search,setSearch]=useState('');const [status,setStatus]=useState('');const [editing,setEditing]=useState(null);const [error,setError]=useState('');
+<<<<<<< Updated upstream
  const load=()=>api.get('/expenses',{params:{page,search,status}}).then(r=>{setRecords(r.data.data);setPagination(r.data.pagination)}).catch(e=>setError(e.response?.data?.message));
+=======
+ const load=()=>api.get('/expenses',{params:{page,search,status}}).then(r=>{setRecords(Array.isArray(r.data?.data)?r.data.data:Array.isArray(r.data)?r.data:[]);setPagination(r.data?.pagination);setError('')}).catch(e=>{setRecords([]);setError(e.response?.data?.message||'Unable to load site expenses')});
+>>>>>>> Stashed changes
  useEffect(load,[page,search,status]);const save=async e=>{e.preventDefault();const fd=new FormData(e.currentTarget);try{editing?.id?await api.put(`/expenses/${editing.id}`,fd):await api.post('/expenses',fd);setEditing(null);load()}catch(e){setError(e.response?.data?.message||'Unable to save')}};
  const setState=async(id,status)=>{await api.patch(`/expenses/${id}/status`,{status});load()};const remove=async id=>{if(confirm('Delete this expense?')){await api.delete(`/expenses/${id}`);load()}};
  const remind=x=>whatsapp(x.mobile,`Dear ${x.supervisor_name},\n\nExpense bill for ${x.site_name} is pending.\n\nPlease upload the bill for approval.\n\nRegards,\nAccounts Team`);

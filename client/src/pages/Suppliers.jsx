@@ -7,7 +7,11 @@ import { Alert, Badge, Empty, Modal, PageTitle, Pagination } from '../components
 const blank = { supplier_name:'',mobile:'',invoice_no:'',gstin:'',amount:'',invoice_date:'',payment_date:'',utr_no:'',remarks:'' };
 export default function Suppliers() {
   const { user } = useAuth(); const [records,setRecords]=useState([]); const [pagination,setPagination]=useState(); const [page,setPage]=useState(1); const [search,setSearch]=useState(''); const [status,setStatus]=useState(''); const [editing,setEditing]=useState(null); const [error,setError]=useState('');
+<<<<<<< Updated upstream
   const load=()=>api.get('/suppliers',{params:{page,search,status}}).then(r=>{setRecords(r.data.data);setPagination(r.data.pagination)}).catch(e=>setError(e.response?.data?.message));
+=======
+  const load=()=>api.get('/suppliers',{params:{page,search,status}}).then(r=>{setRecords(Array.isArray(r.data?.data)?r.data.data:Array.isArray(r.data)?r.data:[]);setPagination(r.data?.pagination);setError('')}).catch(e=>{setRecords([]);setError(e.response?.data?.message||'Unable to load supplier payments')});
+>>>>>>> Stashed changes
   useEffect(load,[page,search,status]);
   const save=async(e)=>{e.preventDefault();setError('');const fd=new FormData(e.currentTarget);try{editing?.id?await api.put(`/suppliers/${editing.id}`,fd):await api.post('/suppliers',fd);setEditing(null);load()}catch(e){setError(e.response?.data?.message||'Unable to save')}};
   const remove=async id=>{if(confirm('Delete this supplier payment?')){await api.delete(`/suppliers/${id}`);load()}};

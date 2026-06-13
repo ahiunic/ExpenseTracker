@@ -18,5 +18,9 @@ api.interceptors.response.use(r => r, error => {
 export const assetUrl = path => path ? `${import.meta.env.VITE_ASSET_URL || ''}${path}` : '';
 export const money = value => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value || 0);
 export const date = value => value ? new Intl.DateTimeFormat('en-IN').format(new Date(value)) : '—';
+<<<<<<< Updated upstream
 export const whatsapp = (mobile, message) => `https://wa.me/${mobile.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+=======
+export const whatsapp = (mobile, message) => `https://wa.me/${String(mobile || '').replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+>>>>>>> Stashed changes
 

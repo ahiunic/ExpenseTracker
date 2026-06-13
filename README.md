@@ -1,3 +1,10 @@
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+# ExpenseTracker
+manage construction finances
+=======
+>>>>>>> Stashed changes
 # Construction Expense & GST Tracker
 
 Production-ready expense operations system for Choudhary Construction. It provides role-based supplier payment tracking, GST bill verification, site expense approvals, document uploads, reports, and prefilled WhatsApp reminders.
@@ -123,3 +130,7 @@ pm2 startup
 
 Use the supplied Nginx proxy configuration and change `proxy_pass` from `http://app:5000` to `http://127.0.0.1:5000`.
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> 7493694 (first commit)
+>>>>>>> Stashed changes
